@@ -1,0 +1,35 @@
+@import '../utils/variables';
+
+.charactersList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  @media screen and (min-width: $laptop) {
+    gap: 20px;
+  }
+}
+
+.imageWrapper {
+  margin: 0 auto;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.filterForm {
+  margin-bottom: 32px;
+  @media screen and (min-width: $laptop) {
+    margin-bottom: 60px;
+  }
+}
+
+.filter {
+  width: 312px;
+  margin: 0 auto;
+  height: 56px;
+  @media screen and (min-width: $laptop) {
+    width: 1015px;
+  }
+}

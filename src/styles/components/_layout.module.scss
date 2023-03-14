@@ -1,0 +1,12 @@
+@import '../utils/variables';
+
+.container {
+  width: 360px;
+  padding: 24px;
+  margin: 0 auto;
+  @media screen and (min-width: $laptop) {
+    width: 1084px;
+    padding: 32px;
+    margin: 0, auto;
+  }
+}
