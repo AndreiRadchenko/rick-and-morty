@@ -12,7 +12,13 @@ export const getCharacters = async (param = '') => {
       data: { results },
     } = await axios.get(query);
     return results;
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
+};
+
+export const getCharacter = async param => {
+  const query = `/character/${param}`;
+  try {
+    const { data } = await axios.get(query);
+    return data;
+  } catch (error) {}
 };

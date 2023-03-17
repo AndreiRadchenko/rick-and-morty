@@ -10,7 +10,7 @@ export function Layout({ children, character }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className={styles.header}>{character ? <></> : <></>}</header>
+      <header className={styles.header}>{character ? <p>Back button</p> : <></>}</header>
       <main>{children}</main>
     </div>
   );

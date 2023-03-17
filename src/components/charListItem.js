@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from '../styles/components/_charListItem.module.scss';
 
-export function CharListItem({ charData: { id, image, name, species } }) {
+export function CharListItem({ charData: { image, name, species } }) {
   return (
     <li>
       <div className={styles.itemCard}>

@@ -1,5 +1,6 @@
 import { CharListItem } from '@/components';
 import styles from '../styles/components/_charList.module.scss';
+import Link from 'next/link';
 
 export const CharList = ({ characters }) => {
   return (
@@ -8,9 +9,9 @@ export const CharList = ({ characters }) => {
         <p>No characters found</p>
       ) : (
         characters?.map(char => (
-          <CharListItem key={char.id} charData={char}>
-            {/* <Link to={`/movies/${film.id}`}>{film.title}</Link> */}
-          </CharListItem>
+          <Link key={char.id} href={`/characters/${char.id}`}>
+            <CharListItem charData={char} />
+          </Link>
         ))
       )}
     </ul>
