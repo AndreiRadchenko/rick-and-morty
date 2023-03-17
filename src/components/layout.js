@@ -12,9 +12,6 @@ export function Layout({ children, character }) {
       </Head>
       <header className={styles.header}>{character ? <></> : <></>}</header>
       <main>{children}</main>
-      {!character && (
-        <div className={styles.backToHome}>{/* <Link href="/">← Back to home</Link> */}</div>
-      )}
     </div>
   );
 }

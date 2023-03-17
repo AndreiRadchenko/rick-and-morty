@@ -9,31 +9,28 @@ import { useRouter } from 'next/router';
 
 export default function Characters() {
   const [charactersList, setCharacterList] = useState([]);
-  const [nameFilter, setNameFilter] = useState('');
-  const [queryName, setQueryName] = useState('');
   const router = useRouter();
-  // let { name } = router.query;
+  const { name = '' } = router.query;
 
-  const handleFilterInput = event => {
-    setNameFilter(event.target.value);
+  const handleFilterInput = ({ target: { value } }) => {
+    router.push(
+      {
+        pathname: '/characters',
+        query: { name: value },
+      },
+      undefined,
+      { shallow: true }
+    );
   };
-
-  const debouncedFilterHandler = useCallback(
-    debounce(event => setNameFilter(event.target.value), 300),
-    []
-  );
 
   useEffect(() => {
     async function fetchData() {
       try {
-        console.log(router);
-        setQueryName(router.name);
-        const characters = await getCharacters(nameFilter);
+        const characters = await getCharacters(name);
         if (!characters) {
           setCharacterList([]);
           return;
         }
-
         setCharacterList(
           characters.map(({ id, name, species, image }) => {
             return {
@@ -48,9 +45,9 @@ export default function Characters() {
         console.log(error);
       }
     }
-
-    fetchData();
-  }, [nameFilter]);
+    const debouncedFetch = debounce(fetchData, 500);
+    debouncedFetch();
+  }, [name]);
 
   return (
     <Layout>
@@ -63,8 +60,7 @@ export default function Characters() {
           priority
         />
       </div>
-      <Searchbar handleFilterInput={debouncedFilterHandler} />
-      <p>{`query name = ${queryName}`}</p>
+      <Searchbar filterValue={name} handleFilterInput={handleFilterInput} />
       <CharList characters={charactersList} />
     </Layout>
   );
