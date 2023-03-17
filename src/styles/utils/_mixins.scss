@@ -1,5 +1,15 @@
-@mixin laptop {
-  @media screen and (min-width: 1440) {
-    @content;
+@mixin customTransition($first-property, $second-property: false, $third-property: false) {
+  $duration: 250ms;
+  @if $second-property {
+    @if $third-property {
+      transition: $first-property $duration var(--timing-function),
+        $second-property $duration var(--timing-function),
+        $third-property $duration var(--timing-function);
+    } @else {
+      transition: $first-property $duration var(--timing-function),
+        $second-property $duration var(--timing-function);
+    }
+  } @else {
+    transition: $first-property $duration var(--timing-function);
   }
 }

@@ -1,0 +1,41 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+
+.filterForm {
+  position: relative;
+  margin-bottom: 32px;
+  @media screen and (min-width: $laptop) {
+    margin-bottom: 60px;
+  }
+}
+
+.filterForm__input {
+  outline: none;
+  width: 312px;
+  margin: 0 auto;
+  height: 56px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding-left: 48px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  @include customTransition(border-color);
+  &:focus {
+    border-color: rgba(var(--text-accent-rgba));
+  }
+  @media screen and (min-width: $laptop) {
+    width: 1015px;
+  }
+}
+
+.filterForm__icon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  @include customTransition(fill);
+  .filterForm:focus-within > & {
+    fill: rgba(var(--text-accent-rgba));
+  }
+}

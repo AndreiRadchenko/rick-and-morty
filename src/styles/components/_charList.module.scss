@@ -1,0 +1,14 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+
+.charactersList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  @media screen and (min-width: $laptop) {
+    gap: 20px;
+  }
+}
