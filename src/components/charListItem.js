@@ -13,6 +13,7 @@ export function CharListItem({ charData: { image, name, species } }) {
             sizes="(max-width: 1440px) 100vw,
               33vw"
             style={{ objectFit: 'cover', objectPosition: 'center' }}
+            priority
           />
         </div>
         <div className={styles.itemCard__textWrapper}>

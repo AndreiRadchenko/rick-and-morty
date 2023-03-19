@@ -1,26 +1,32 @@
-export const CharDetails = ({ charInfo: { gender, status, species, origin, type } }) => {
+import styles from '../styles/components/_charDetailsList.module.scss';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { uid } from 'uid';
+
+const capitalize = word => word.charAt(0).toUpperCase() + word.slice(1);
+
+export const CharDetailsList = ({ charInfo }) => {
+  let infoArrayFiltered = new Array(5).fill(['', '']);
+  if (charInfo !== null) {
+    const infoArray = Object.entries(charInfo);
+    const excludedParams = ['name', 'image'];
+    infoArrayFiltered = infoArray?.filter(([name, value]) => !excludedParams.includes(name));
+  }
+
   return (
-    <>
-      <div>
-        <h3>Gender</h3>
-        <p>{gender}</p>
-      </div>
-      <div>
-        <h3>Status</h3>
-        <p>{status}</p>
-      </div>
-      <div>
-        <h3>Species</h3>
-        <p>{species}</p>
-      </div>
-      <div>
-        <h3>Origin</h3>
-        <p>{origin}</p>
-      </div>
-      <div>
-        <h3>Type</h3>
-        <p>{type}</p>
-      </div>
-    </>
+    <ul className={styles.charInfo}>
+      {infoArrayFiltered?.map(([name, value]) => {
+        return (
+          <li key={uid()} className={styles.charInfo__item}>
+            <div>
+              <h3 className={styles.charInfo__item__title}>
+                {name ? capitalize(name) : <Skeleton width={120} />}
+              </h3>
+              <p className={styles.charInfo__item__value}>{value || <Skeleton width={120} />}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 };

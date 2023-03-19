@@ -33,9 +33,15 @@
   position: absolute;
   top: 50%;
   left: 16px;
+  width: 24px;
+  height: 24px;
   transform: translateY(-50%);
+  fill: black;
   @include customTransition(fill);
   .filterForm:focus-within > & {
+    fill: rgba(var(--text-accent-rgba));
+  }
+  .filterForm:hover > & {
     fill: rgba(var(--text-accent-rgba));
   }
 }

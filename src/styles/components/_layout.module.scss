@@ -2,11 +2,11 @@
 
 .container {
   width: 360px;
-  padding: 24px;
+  padding: 0 24px 24px;
   margin: 0 auto;
   @media screen and (min-width: $laptop) {
     width: 1084px;
-    padding: 32px;
+    padding: 0 32px 32px;
     margin: 0, auto;
   }
 }

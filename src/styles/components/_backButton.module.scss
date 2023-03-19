@@ -1,0 +1,40 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+
+.backButton {
+  display: flex;
+  // position: relative;
+  //   width: 108px;
+  height: 24px;
+  border: solid 1px tomato;
+  //   margin-left: 25px;
+  margin-top: 25px;
+  color: black;
+  @media screen and (min-width: $laptop) {
+    // margin-left: 50px;
+    margin-top: 25px;
+  }
+}
+
+.backButton__icon {
+  display: block;
+  // position: absolute;
+  //   z-index: 1000;
+  // top: 0;
+  // left: 0;
+  // transform: translateY(25%);
+  fill: red;
+  width: 16px;
+  height: 16px;
+  color: black;
+  border: solid 1px teal;
+}
+
+.backButton__text {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  color: black;
+}

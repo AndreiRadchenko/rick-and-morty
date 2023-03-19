@@ -50,13 +50,14 @@ export default function Characters() {
   }, [name]);
 
   return (
-    <Layout>
+    <Layout backButton>
       <div className={styles.imageWrapper}>
         <Image
           src="/images/rick-and-morty.jpg"
           alt="Rick and Morty"
-          className={styles.vercelLogo}
           fill
+          sizes="(max-width: 1440px) 50vw,
+              33vw"
           priority
         />
       </div>

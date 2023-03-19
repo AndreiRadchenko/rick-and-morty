@@ -1,7 +1,8 @@
 import styles from '../styles/components/_layout.module.scss';
 import Head from 'next/head';
+import { BackButton } from '../components';
 
-export function Layout({ children, character }) {
+export function Layout({ children, backButton }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -10,7 +11,7 @@ export function Layout({ children, character }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className={styles.header}>{character ? <p>Back button</p> : <></>}</header>
+      <header>{backButton ? <BackButton /> : <></>}</header>
       <main>{children}</main>
     </div>
   );
