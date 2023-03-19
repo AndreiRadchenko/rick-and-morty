@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { getCharacters } from '@/utils/charApi';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { CharList, Searchbar } from '@/components';
 import styles from '../../styles/pages/_characters.module.scss';
 import { Layout } from '@/components';
@@ -47,10 +47,10 @@ export default function Characters() {
     }
     const debouncedFetch = debounce(fetchData, 500);
     debouncedFetch();
-  }, [name]);
+  }, [name, router]);
 
   return (
-    <Layout backButton>
+    <Layout>
       <div className={styles.imageWrapper}>
         <Image
           src="/images/rick-and-morty.jpg"
@@ -62,7 +62,7 @@ export default function Characters() {
         />
       </div>
       <Searchbar filterValue={name} handleFilterInput={handleFilterInput} />
-      <CharList characters={charactersList} />
+      <CharList characters={charactersList} queryName={name} />
     </Layout>
   );
 }

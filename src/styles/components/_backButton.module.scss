@@ -3,31 +3,24 @@
 
 .backButton {
   display: flex;
-  // position: relative;
-  //   width: 108px;
-  height: 24px;
-  border: solid 1px tomato;
-  //   margin-left: 25px;
+  align-items: center;
+  width: 120px;
   margin-top: 25px;
+  margin-left: 4px;
   color: black;
+  @include customTransition(color);
+  &:hover {
+    color: rgba(var(--text-accent-rgba));
+  }
   @media screen and (min-width: $laptop) {
-    // margin-left: 50px;
-    margin-top: 25px;
   }
 }
 
 .backButton__icon {
   display: block;
-  // position: absolute;
-  //   z-index: 1000;
-  // top: 0;
-  // left: 0;
-  // transform: translateY(25%);
-  fill: red;
+  fill: currentColor;
   width: 16px;
   height: 16px;
-  color: black;
-  border: solid 1px teal;
 }
 
 .backButton__text {
@@ -36,5 +29,5 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 21px;
-  color: black;
+  margin-left: 12px;
 }
