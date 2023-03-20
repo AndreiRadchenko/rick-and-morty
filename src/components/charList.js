@@ -2,14 +2,14 @@ import { CharListItem } from '@/components';
 import styles from '../styles/components/_charList.module.scss';
 import Link from 'next/link';
 
-export const CharList = ({ characters, queryName }) => {
+export const CharList = ({ characters, queryName, queryPage }) => {
   return (
     <ul className={styles.charactersList}>
       {characters.length === 0 ? (
         <p>No characters found</p>
       ) : (
         characters?.map(char => (
-          <Link key={char.id} href={`/characters/${char.id}?name=${queryName}`}>
+          <Link key={char.id} href={`/characters/${char.id}?name=${queryName}&page=${queryPage}`}>
             <CharListItem charData={char} />
           </Link>
         ))

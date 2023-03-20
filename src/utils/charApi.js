@@ -2,16 +2,14 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://rickandmortyapi.com/api';
 
-export const getCharacters = async (param = '') => {
+export const getCharacters = async (name, page) => {
   let query = '/character';
-  if (param) {
-    query = `${query}/?name=${param}`;
-  }
+  query = `${query}/?page=${page}&name=${name}`;
+  console.log(query);
   try {
-    const {
-      data: { results },
-    } = await axios.get(query);
-    return results;
+    const { data } = await axios.get(query);
+    // console.log(data);
+    return data;
   } catch (error) {}
 };
 
