@@ -1,8 +1,6 @@
-import Image from 'next/image';
 import { getCharacters } from '@/utils/charApi';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { CharList, Searchbar } from '@/components';
-import styles from '../../styles/pages/_characters.module.scss';
 import { Layout } from '@/components';
 import debounce from 'lodash.debounce';
 import { useRouter } from 'next/router';
@@ -51,16 +49,6 @@ export default function Characters() {
 
   return (
     <Layout>
-      <div className={styles.imageWrapper}>
-        <Image
-          src="/images/rick-and-morty.jpg"
-          alt="Rick and Morty"
-          fill
-          sizes="(max-width: 1440px) 50vw,
-              33vw"
-          priority
-        />
-      </div>
       <Searchbar filterValue={name} handleFilterInput={handleFilterInput} />
       <CharList characters={charactersList} queryName={name} />
     </Layout>

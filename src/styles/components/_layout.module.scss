@@ -1,4 +1,5 @@
 @import '../utils/variables';
+@import '../utils/mixins';
 
 .container {
   width: 360px;
@@ -8,5 +9,38 @@
     width: 1084px;
     padding: 0 32px 32px;
     margin: 0, auto;
+  }
+}
+
+.header {
+  padding-top: 23px;
+  padding-bottom: 32px;
+  @media screen and (min-width: $laptop) {
+    padding-bottom: 16px;
+  }
+}
+
+.header__image {
+  object-fit: cover;
+  object-position: center;
+  width: 312px;
+  height: 104px;
+  @media screen and (min-width: $laptop) {
+    width: 600px;
+    height: 200px;
+  }
+}
+
+.headerImageWrapper {
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  width: 312px;
+  height: 167px;
+  padding-top: 63px;
+  @media screen and (min-width: $laptop) {
+    width: 600px;
+    height: 269px;
+    padding-top: 69px;
   }
 }
