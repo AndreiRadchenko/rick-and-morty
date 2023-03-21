@@ -23,6 +23,15 @@
   }
 }
 
+.skeleton_image {
+  width: 312px;
+  height: 232px;
+  @media screen and (min-width: $laptop) {
+    width: 240px;
+    height: 168px;
+  }
+}
+
 .itemCard__imageWrapper {
   position: relative;
   display: block;

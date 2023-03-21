@@ -9,14 +9,6 @@
 
   --text-accent-rgba: 40, 140, 70, 0.8;
   --text-disabled-rgba: 100, 100, 100, 0.5;
-
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
 }
 
 * {

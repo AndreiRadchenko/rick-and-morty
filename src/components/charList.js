@@ -1,19 +1,40 @@
 import { CharListItem } from '@/components';
 import styles from '../styles/components/_charList.module.scss';
 import Link from 'next/link';
+import { useMedia } from 'react-use';
 
-export const CharList = ({ characters, queryName, queryPage }) => {
+const createDummyArray = isWide => {
+  return isWide
+    ? Array.from({ length: 8 }, (_, i) => ({
+        id: i,
+        name: '',
+      }))
+    : Array.from({ length: 3 }, (_, i) => ({
+        id: i,
+        name: '',
+      }));
+};
+
+export const CharList = ({ characters, isLoading, queryName, queryPage }) => {
+  const isWide = useMedia('(min-width: 1440px)', false);
+
+  if (isLoading) {
+    characters = createDummyArray(isWide);
+  }
+
   return (
-    <ul className={styles.charactersList}>
+    <>
       {characters.length === 0 ? (
         <p>No characters found</p>
       ) : (
-        characters?.map(char => (
-          <Link key={char.id} href={`/characters/${char.id}?name=${queryName}&page=${queryPage}`}>
-            <CharListItem charData={char} />
-          </Link>
-        ))
+        <ul className={styles.charactersList}>
+          {characters?.map(char => (
+            <Link key={char.id} href={`/characters/${char.id}?name=${queryName}&page=${queryPage}`}>
+              <CharListItem charData={char} isLoading={isLoading} />
+            </Link>
+          ))}
+        </ul>
       )}
-    </ul>
+    </>
   );
 };

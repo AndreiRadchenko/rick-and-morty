@@ -11,9 +11,10 @@ import { useMedia } from 'react-use';
 export default function Characters() {
   const [charactersList, setCharacterList] = useState([]);
   const [info, setInfo] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { name = '', page = 1 } = router.query;
-  const isWide = useMedia('(min-width: 1440px)');
+  const isWide = useMedia('(min-width: 1440px)', false);
 
   const handleFilterInput = ({ target: { value } }) => {
     router.push(
@@ -40,6 +41,7 @@ export default function Characters() {
   useEffect(() => {
     async function fetchData() {
       try {
+        setIsLoading(true);
         const data = await getCharacters(name, page);
         if (!data) {
           setCharacterList([]);
@@ -59,6 +61,8 @@ export default function Characters() {
         setInfo(data.info);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     }
     const debouncedFetch = debounce(fetchData, 500);
@@ -68,17 +72,22 @@ export default function Characters() {
   return (
     <Layout>
       <Searchbar filterValue={name} handleFilterInput={handleFilterInput} />
-      <CharList characters={charactersList} queryName={name} queryPage={page} />
+      <CharList
+        characters={charactersList}
+        isLoading={isLoading}
+        queryName={name}
+        queryPage={page}
+      />
       <ReactPaginate
         breakLabel="..."
         nextLabel=">>"
         onPageChange={handlePageClick}
         pageRangeDisplayed={isWide ? 5 : 3}
         marginPagesDisplayed={isWide ? 2 : 1}
-        pageCount={info !== null ? Number(info.pages - 1) : 0}
+        pageCount={info !== null ? Number(info.pages) - 1 : 0}
         previousLabel="<<"
         renderOnZeroPageCount={null}
-        forcePage={info !== null ? Number(page) - 1 : -1}
+        forcePage={info !== null ? Number(page) - 1 : 0}
         containerClassName={styles.pagination__container}
         pageClassName={styles.pagination__page}
         activeClassName={styles.active__page}
