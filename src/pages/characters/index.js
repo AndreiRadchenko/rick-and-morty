@@ -5,18 +5,21 @@ import { Layout } from '@/components';
 import debounce from 'lodash.debounce';
 import { useRouter } from 'next/router';
 import ReactPaginate from 'react-paginate';
+import styles from '../../styles/components/_reactPaginate.module.scss';
+import { useMedia } from 'react-use';
 
 export default function Characters() {
   const [charactersList, setCharacterList] = useState([]);
   const [info, setInfo] = useState(null);
   const router = useRouter();
-  const { name = '', page = '' } = router.query;
+  const { name = '', page = 1 } = router.query;
+  const isWide = useMedia('(min-width: 1440px)');
 
   const handleFilterInput = ({ target: { value } }) => {
     router.push(
       {
         pathname: '/characters',
-        query: { ...router.query, name: value },
+        query: { name: value, page: 1 },
       },
       undefined,
       { shallow: true }
@@ -27,7 +30,7 @@ export default function Characters() {
     router.push(
       {
         pathname: '/characters',
-        query: { ...router.query, page: event.selected },
+        query: { ...router.query, page: event.selected + 1 },
       },
       undefined,
       { shallow: true }
@@ -40,6 +43,7 @@ export default function Characters() {
         const data = await getCharacters(name, page);
         if (!data) {
           setCharacterList([]);
+          setInfo(null);
           return;
         }
         setCharacterList(
@@ -67,12 +71,20 @@ export default function Characters() {
       <CharList characters={charactersList} queryName={name} queryPage={page} />
       <ReactPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel=">>"
         onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={info ? info.pages : 1}
-        previousLabel="< previous"
+        pageRangeDisplayed={isWide ? 5 : 3}
+        marginPagesDisplayed={isWide ? 2 : 1}
+        pageCount={info !== null ? Number(info.pages - 1) : 0}
+        previousLabel="<<"
         renderOnZeroPageCount={null}
+        forcePage={info !== null ? Number(page) - 1 : -1}
+        containerClassName={styles.pagination__container}
+        pageClassName={styles.pagination__page}
+        activeClassName={styles.active__page}
+        previousClassName={styles.previous__page}
+        nextClassName={styles.next__page}
+        disabledClassName={styles.disabled__next}
       />
     </Layout>
   );

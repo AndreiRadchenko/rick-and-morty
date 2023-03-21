@@ -8,6 +8,7 @@
     'Courier New', monospace;
 
   --text-accent-rgba: 40, 140, 70, 0.8;
+  --text-disabled-rgba: 100, 100, 100, 0.5;
 
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;

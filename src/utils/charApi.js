@@ -5,10 +5,8 @@ axios.defaults.baseURL = 'https://rickandmortyapi.com/api';
 export const getCharacters = async (name, page) => {
   let query = '/character';
   query = `${query}/?page=${page}&name=${name}`;
-  console.log(query);
   try {
     const { data } = await axios.get(query);
-    // console.log(data);
     return data;
   } catch (error) {}
 };

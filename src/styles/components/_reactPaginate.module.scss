@@ -1,0 +1,58 @@
+@import '../utils/variables';
+@import '../utils/mixins';
+
+.pagination__container {
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 2;
+  color: rgba(20, 20, 20, 0.8);
+  @media screen and (min-width: $laptop) {
+    gap: 16px;
+    font-size: 22px;
+  }
+}
+.pagination__page {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
+  @media screen and (min-width: $laptop) {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.active__page {
+  background-color: rgba(40, 140, 70, 0.7);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+}
+
+.previous__page,
+.next__page {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.disabled__next {
+  color: gray;
+  &:hover {
+    cursor: default;
+  }
+}
