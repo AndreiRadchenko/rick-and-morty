@@ -11,7 +11,7 @@ import { useMedia } from 'react-use';
 export default function Characters() {
   const [charactersList, setCharacterList] = useState([]);
   const [info, setInfo] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const { name = '', page = 1 } = router.query;
   const isWide = useMedia('(min-width: 1440px)', false);
@@ -65,8 +65,9 @@ export default function Characters() {
         setIsLoading(false);
       }
     }
-    const debouncedFetch = debounce(fetchData, 500);
-    debouncedFetch();
+    // const debouncedFetch = debounce(fetchData, 1000);
+    // debouncedFetch();
+    fetchData();
   }, [name, page, router]);
 
   return (

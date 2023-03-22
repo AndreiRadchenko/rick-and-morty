@@ -24,7 +24,7 @@ export const CharList = ({ characters, isLoading, queryName, queryPage }) => {
 
   return (
     <>
-      {characters.length === 0 ? (
+      {characters.length === 0 && !isLoading ? (
         <p>No characters found</p>
       ) : (
         <ul className={styles.charactersList}>
