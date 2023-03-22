@@ -1,5 +1,5 @@
 import { getCharacters } from '@/utils/charApi';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { CharList, Searchbar } from '@/components';
 import { Layout } from '@/components';
 import debounce from 'lodash.debounce';
@@ -38,37 +38,68 @@ export default function Characters() {
     );
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-        const data = await getCharacters(name, page);
-        if (!data) {
-          setCharacterList([]);
-          setInfo(null);
-          return;
-        }
-        setCharacterList(
-          data.results.map(({ id, name, species, image }) => {
-            return {
-              id,
-              name,
-              species,
-              image,
-            };
-          })
-        );
-        setInfo(data.info);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
+  // const fetchData = useCallback(
+  //   debounce(async (name, page) => {
+  //     try {
+  //       setIsLoading(true);
+  //       const data = await getCharacters(name, page);
+  //       if (!data) {
+  //         setCharacterList([]);
+  //         setInfo(null);
+  //         return;
+  //       }
+  //       setCharacterList(
+  //         data.results.map(({ id, name, species, image }) => {
+  //           return {
+  //             id,
+  //             name,
+  //             species,
+  //             image,
+  //           };
+  //         })
+  //       );
+  //       setInfo(data.info);
+  //     } catch (error) {
+  //       console.log(error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }, 500),
+  //   []
+  // );
+
+  const fetchData = useCallback(async (name, page) => {
+    try {
+      setIsLoading(true);
+      const data = await getCharacters(name, page);
+      if (!data) {
+        setCharacterList([]);
+        setInfo(null);
+        return;
       }
+      setCharacterList(
+        data.results.map(({ id, name, species, image }) => {
+          return {
+            id,
+            name,
+            species,
+            image,
+          };
+        })
+      );
+      setInfo(data.info);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
-    // const debouncedFetch = debounce(fetchData, 1000);
-    // debouncedFetch();
-    fetchData();
-  }, [name, page, router]);
+  }, []);
+
+  const debouncedFetch = useMemo(() => debounce(fetchData, 500), [fetchData]);
+
+  useEffect(() => {
+    debouncedFetch(name, page);
+  }, [debouncedFetch, name, page]);
 
   return (
     <Layout>
